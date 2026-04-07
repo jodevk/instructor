@@ -122,49 +122,70 @@
     <section class="pricing" id="try">
         <div class="container">
             <h2 style="text-align: center;">Тарифы</h2>
-            <p style="text-align: center; color: #6c7e8e; margin-bottom: 40px;">Платите только за активные инструкции. Неактивные — не тарифицируются.</p>
+            <p style="text-align: center; color: #6c7e8e; margin-bottom: 40px;">
+                Платите за количество моделей (артикулов). Одна модель — одна инструкция. 
+                Продали 10 000 шкафов — всё равно одна инструкция.
+            </p>
             
             <div class="pricing-grid">
+                <!-- Пилот (скрыт, но можно оставить для лид-магнита) -->
+                <div class="plan">
+                <!-- Старт -->
                 <div class="plan">
                     <h3>Старт</h3>
                     <div class="plan-price">2 990 ₽ <span class="period">/мес</span></div>
                     <ul>
-                        <li>✓ до 100 активных инструкций</li>
+                        <li>✓ до 200 моделей</li>
                     </ul>
-                    <a href="producer/" class="btn btn-outline" style="width: 100%; text-align: center;">Выбрать</a>
-                </div>  
+                    <a href="producer/" class="btn btn-primary" style="width: 100%; text-align: center;">Выбрать</a>
+                </div>
+                
+                <!-- Бизнес -->
                 <div class="plan">
                     <h3>Бизнес</h3>
                     <div class="plan-price">5 990 ₽ <span class="period">/мес</span></div>
                     <ul>
-                        <li>✓ до 500 активных инструкций</li>
+                        <li>✓ до 1 000 моделей</li>
                     </ul>
                     <a href="producer/" class="btn btn-outline" style="width: 100%; text-align: center;">Выбрать</a>
                 </div>
+                
+                <!-- Корпоративный -->
                 <div class="plan">
                     <h3>Корпоративный</h3>
                     <div class="plan-price">9 990 ₽ <span class="period">/мес</span></div>
                     <ul>
-                        <li>✓ до 2 000 активных инструкций</li>
+                        <li>✓ до 5 000 моделей</li>
                     </ul>
                     <a href="producer/" class="btn btn-outline" style="width: 100%; text-align: center;">Выбрать</a>
                 </div>
+                
+                <!-- Enterprise -->
                 <div class="plan enterprise">
                     <h3>Enterprise</h3>
                     <div class="plan-price">от 20 000 ₽ <span class="period">/мес</span></div>
                     <ul>
-                        <li>✓ от 2 000+ активных инструкций</li>
+                        <li>✓ от 5 000+ моделей</li>
+                        <li>✓ Интеграция с 1С / ERP</li>
+                        <li>✓ API для маркетплейсов</li>
                     </ul>
                     <a href="#contact" class="btn btn-outline" style="width: 100%; text-align: center;">Связаться</a>
                 </div>
             </div>
+            
             <div class="pricing-note">
-                💡 <strong>Что такое активная инструкция?</strong> Инструкция, по которой был хотя бы 1 просмотр за последние 30 дней.<br>
-                Неактивные инструкции не тарифицируются. Вы платите только за то, что реально используется.
+                💡 <strong>Как считаются модели?</strong><br>
+                Одна модель = один артикул = одна инструкция. Вы загружаете PDF для «Шкафа Элегант SK-123» — это 1 модель.<br>
+                Продали 10 000 таких шкафов — всё равно 1 модель. Обновили PDF (исправили ошибку) — новая версия, модель та же, счётчик не увеличивается.
+            </div>
+            
+            <div class="pricing-note warning">
+                ⚠️ <strong>Важно:</strong> Если у модели есть модификации (SK-123A, SK-123B), загружайте все PDF под одним артикулом.<br>
+                Система покажет клиенту выбор цвета/размера перед сборкой. Это всё ещё одна модель в тарифе.
             </div>
         </div>
     </section>
-
+    
     <section class="cta">
         <div class="container">
             <h2>Готовы убрать бумагу из коробок?</h2>
