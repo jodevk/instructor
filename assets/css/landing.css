@@ -276,22 +276,106 @@ h3 {
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
-  margin-top: 48px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+  align-items: stretch;
 }
 
 .plan {
   background: white;
-  border-radius: 32px;
-  padding: 32px;
+  border-radius: 28px;
+  padding: 24px 22px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2f4;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.plan.enterprise {
+  border-color: #c8e6d4;
+  background: linear-gradient(180deg, #f8fdfb 0%, #ffffff 55%);
+  box-shadow: 0 10px 28px rgba(26, 109, 76, 0.08);
+}
+
+.plan > a.btn {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .plan-price {
-  font-size: 36px;
+  font-size: clamp(26px, 2.5vw, 34px);
   font-weight: 800;
-  margin: 20px 0;
+  margin: 16px 0;
+  line-height: 1.15;
+}
+
+.plan-price .period {
+  font-size: 0.45em;
+  font-weight: 600;
+  color: #6c7e8e;
+  white-space: nowrap;
+}
+
+.pricing-notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pricing-note {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px 26px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.pricing-note--info {
+  border-left: 4px solid #2c5f7a;
+}
+
+.pricing-note--warning {
+  border-left: 4px solid #f59e0b;
+  background: linear-gradient(135deg, #fffbeb 0%, #ffffff 70%);
+  border-color: #fde68a;
+}
+
+.pricing-note__icon {
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pricing-note__body {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #4a5b6b;
+}
+
+.pricing-note__title {
+  display: block;
+  font-size: 17px;
+  color: #1a2c3e;
+  margin-bottom: 10px;
+}
+
+.pricing-note__body p {
+  margin: 0 0 10px;
+}
+
+.pricing-note__body p:last-child {
+  margin-bottom: 0;
 }
 
 .plan ul {
@@ -330,11 +414,27 @@ h3 {
   font-weight: 600;
 }
 
+@media (max-width: 1100px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .value-grid {
     grid-template-columns: 1fr;
   }
   .hero-stats {
     flex-wrap: wrap;
+  }
+
+  .pricing-notes {
+    grid-template-columns: 1fr;
+    margin-top: 36px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
