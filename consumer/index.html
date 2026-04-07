@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Инструкция по сборке</title>
+    <link rel="stylesheet" href="../assets/css/consumer.css">
+</head>
+<body>
+<div class="container">
+    <a class="back-link" href="../">← На лендинг</a>
+
+    <div class="header">
+        <h1 id="productTitle">Загрузка…</h1>
+        <div class="article">
+            <span id="productArticle">—</span>
+            <span>🔲 QR-код на коробке</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stats-text">
+            📊 Прогресс сборки: <strong id="completedCount">0</strong> из <span id="totalSteps">0</span> шагов выполнено
+        </div>
+        <button type="button" class="reset-stats" id="resetStats">Сбросить</button>
+    </div>
+
+    <div id="postAssembly" class="post-assembly" style="display: none;">
+        <h3>После сборки</h3>
+        <ul></ul>
+    </div>
+
+    <div class="step-container" id="stepContainer">
+        <div class="step-description">Загрузка инструкции...</div>
+    </div>
+
+    <div class="footer" id="footerSupport">
+        <strong>💡 Нет интернета?</strong> Звоните: …
+    </div>
+</div>
+
+<div id="missingModal" class="modal">
+    <div class="modal-content">
+        <h2>📦 Не хватает детали</h2>
+        <form id="missingForm">
+            <div class="form-group">
+                <label for="partName">Чего не хватает? *</label>
+                <select id="partName" required>
+                    <option value="">Выберите деталь</option>
+                    <option>Шуруп 4x16 (4 шт)</option>
+                    <option>Полка стеклянная</option>
+                    <option>Уголок крепёжный</option>
+                    <option>Ножка (4 шт)</option>
+                    <option>Другое (напишу в комментарии)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="photo">Фото (желательно)</label>
+                <input type="file" id="photo" accept="image/*" capture="environment">
+                <div id="photoPreview" class="photo-preview"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="comment">Комментарий</label>
+                <textarea id="comment" rows="3" placeholder="Что именно отсутствует?"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="orderNumber">Номер заказа (если знаете)</label>
+                <input type="text" id="orderNumber" placeholder="Например: 12345">
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="confirm" required>
+                <label for="confirm">Я подтверждаю, что деталь отсутствовала в запечатанной упаковке</label>
+            </div>
+
+            <button type="submit" class="submit-btn">📤 Отправить заявку</button>
+            <button type="button" class="submit-btn close-modal" onclick="closeModal()">Закрыть</button>
+        </form>
+    </div>
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/consumer/instruction.js"></script>
+</body>
+</html>

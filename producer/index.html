@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка инструкции — Панель сотрудника</title>
+    <link rel="stylesheet" href="../assets/css/producer.css">
+</head>
+<body>
+<div class="container">
+    <a class="back-link" href="../">← На главную</a>
+    <a class="back-link" href="analytics.html" style="margin-left: 16px;">Аналитика (демо)</a>
+
+    <h1>📄 Загрузить инструкцию</h1>
+    <div class="sub">Создайте QR-код и карточку-шпаргалку за 2 минуты</div>
+
+    <form id="uploadForm">
+        <div class="form-group">
+            <label for="modelName">Название модели *</label>
+            <input type="text" id="modelName" required placeholder="Например: Шкаф Элегант">
+        </div>
+
+        <div class="form-group">
+            <label for="article">Артикул</label>
+            <input type="text" id="article" placeholder="Например: SK-123">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email для уведомлений (логистам)</label>
+            <input type="email" id="email" required placeholder="logist@fabrika.ru">
+        </div>
+
+        <div class="form-group">
+            <label for="pdfFile">PDF-инструкция *</label>
+            <input type="file" id="pdfFile" accept=".pdf" required>
+        </div>
+
+        <button type="submit">🚀 Сгенерировать QR и инструкцию</button>
+    </form>
+
+    <div id="result" class="result">
+        <h3>✅ Готово!</h3>
+        <div class="qr-code" id="qrContainer"></div>
+        <div class="links">
+            <strong>Ссылка на цифровую сборку:</strong><br>
+            <span id="shortUrl"></span>
+        </div>
+        <button type="button" id="downloadCard" class="download-btn">📄 Скачать карточку-шпаргалку (HTML для печати)</button>
+        <button type="button" id="downloadQr" class="download-btn download-btn--secondary">📷 Скачать QR-код (PNG)</button>
+    </div>
+
+    <div id="error" class="error"></div>
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/producer/upload.js"></script>
+</body>
+</html>
