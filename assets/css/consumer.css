@@ -119,17 +119,8 @@ body {
   position: relative;
   background: #fafbfc;
   text-align: center;
-  padding: 24px;
-  cursor: pointer;
-}
-
-.step-image img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  transition: transform 0.2s;
-  border-radius: 16px;
+  padding: 0;
+  cursor: default;
 }
 
 .zoom-hint {
@@ -330,12 +321,38 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .stats-text {
   font-size: 13px;
   color: #2c5f7a;
   font-weight: 500;
+  flex: 1;
+  min-width: 160px;
+}
+
+.stats-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.review-open-btn {
+  background: #fff;
+  border: 1px solid #93c5fd;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.review-open-btn:hover {
+  background: #eff6ff;
 }
 
 .reset-stats {
@@ -345,6 +362,226 @@ body {
   font-size: 12px;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.shop-cta-bar {
+  margin: 0 20px 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
+  border: 1px solid #fcd34d;
+  text-align: center;
+}
+
+.shop-cta-bar__text {
+  font-size: 14px;
+  color: #92400e;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.shop-cta-bar__link {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #b45309;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.shop-cta-bar__link:hover {
+  color: #78350f;
+}
+
+.modal-lead {
+  font-size: 14px;
+  color: #64748b;
+  margin: -12px 0 20px;
+}
+
+.star-rating {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-start;
+}
+
+.star-rating .star {
+  background: none;
+  border: none;
+  font-size: 36px;
+  line-height: 1;
+  color: #cbd5e1;
+  cursor: pointer;
+  padding: 0 2px;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.star-rating .star.is-active,
+.star-rating .star.is-hover {
+  color: #f59e0b;
+  transform: scale(1.05);
+}
+
+.modal--review {
+  z-index: 110;
+}
+
+.step-image-viewport {
+  position: relative;
+  overflow: auto;
+  max-height: min(70vh, 520px);
+  margin: 16px 16px 0;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  border-radius: 16px;
+  background: #f1f5f9;
+}
+
+.step-image-viewport img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.15s ease-out;
+  border-radius: 16px;
+  transform-origin: center center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.zoom-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 12px 14px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.zoom-tool-btn {
+  min-width: 44px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+}
+
+.zoom-tool-btn:active {
+  background: #e2e8f0;
+}
+
+.zoom-tool-btn--text {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.zoom-pct {
+  min-width: 52px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.zoom-hint {
+  position: absolute;
+  bottom: 52px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+  max-width: calc(100% - 24px);
+  text-align: right;
+}
+
+.zoom-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(15, 23, 42, 0.94);
+  flex-direction: column;
+  padding: env(safe-area-inset-top, 12px) 12px 12px;
+}
+
+.zoom-lightbox.is-open {
+  display: flex;
+}
+
+.zoom-lightbox__close {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.zoom-lightbox__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 48px 0 12px;
+}
+
+.zoom-lightbox__toolbar .zoom-tool-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #f8fafc;
+}
+
+.zoom-lightbox__pct {
+  min-width: 56px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.zoom-lightbox__viewport {
+  flex: 1;
+  overflow: auto;
+  touch-action: none;
+  border-radius: 12px;
+  cursor: grab;
+}
+
+.zoom-lightbox__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.zoom-lightbox__viewport img {
+  display: block;
+  max-width: none;
+  margin: 0 auto;
+  transform-origin: 0 0;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.zoom-lightbox__hint {
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+  padding: 8px 0 4px;
 }
 
 .post-assembly {

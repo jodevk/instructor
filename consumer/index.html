@@ -25,7 +25,15 @@
         <div class="stats-text">
             📊 Прогресс сборки: <strong id="completedCount">0</strong> из <span id="totalSteps">0</span> шагов выполнено
         </div>
-        <button type="button" class="reset-stats" id="resetStats">Сбросить</button>
+        <div class="stats-actions">
+            <button type="button" class="review-open-btn" id="openReviewBtn" title="Оценить инструкцию">⭐ Отзыв</button>
+            <button type="button" class="reset-stats" id="resetStats">Сбросить</button>
+        </div>
+    </div>
+
+    <div id="shopCtaBar" class="shop-cta-bar" style="display: none;" hidden>
+        <p class="shop-cta-bar__text" id="shopCtaLine"></p>
+        <a class="shop-cta-bar__link" id="shopCtaLink" href="#" target="_blank" rel="noopener noreferrer"></a>
     </div>
 
     <div id="postAssembly" class="post-assembly" style="display: none;">
@@ -40,6 +48,46 @@
     <div class="footer" id="footerSupport">
         <strong>💡 Нет интернета?</strong> Звоните: …
     </div>
+</div>
+
+<div id="reviewModal" class="modal modal--review" aria-hidden="true">
+    <div class="modal-content">
+        <h2>⭐ Отзыв об инструкции</h2>
+        <p class="modal-lead">Помогите заводу сделать сборку понятнее.</p>
+        <form id="reviewForm">
+            <div class="form-group">
+                <label>Оценка *</label>
+                <div class="star-rating" id="starRating" role="radiogroup" aria-label="Оценка от 1 до 5">
+                    <button type="button" class="star" data-value="1" aria-label="1 звезда">★</button>
+                    <button type="button" class="star" data-value="2" aria-label="2 звезды">★</button>
+                    <button type="button" class="star" data-value="3" aria-label="3 звезды">★</button>
+                    <button type="button" class="star" data-value="4" aria-label="4 звезды">★</button>
+                    <button type="button" class="star" data-value="5" aria-label="5 звёзд">★</button>
+                </div>
+                <input type="hidden" id="reviewRating" name="rating" value="">
+            </div>
+            <div class="form-group">
+                <label for="reviewText">Комментарий (необязательно)</label>
+                <textarea id="reviewText" name="text" rows="4" placeholder="Что было непонятно или наоборот удобно?"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Отправить отзыв</button>
+            <button type="button" class="submit-btn close-modal" id="closeReviewModal">Закрыть</button>
+        </form>
+    </div>
+</div>
+
+<div id="zoomLightbox" class="zoom-lightbox" aria-hidden="true">
+    <button type="button" class="zoom-lightbox__close" id="zoomLightboxClose" aria-label="Закрыть">✕</button>
+    <div class="zoom-lightbox__toolbar">
+        <button type="button" class="zoom-tool-btn" id="lbZoomOut" aria-label="Уменьшить">−</button>
+        <span class="zoom-lightbox__pct" id="lbZoomPct">100%</span>
+        <button type="button" class="zoom-tool-btn" id="lbZoomIn" aria-label="Увеличить">+</button>
+        <button type="button" class="zoom-tool-btn zoom-tool-btn--text" id="lbZoomReset">Сброс</button>
+    </div>
+    <div class="zoom-lightbox__viewport" id="zoomLightboxViewport">
+        <img src="" alt="" id="zoomLightboxImg">
+    </div>
+    <p class="zoom-lightbox__hint">Щипок — масштаб · перетаскивание — сдвиг</p>
 </div>
 
 <div id="missingModal" class="modal">

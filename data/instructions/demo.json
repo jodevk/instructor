@@ -4,6 +4,11 @@
   "article": "SK-123",
   "supportPhone": "8-800-123-45-67",
   "fallbackUrlHint": "instr.ru/sk123",
+  "shopCta": {
+    "href": "https://example.com/magazin",
+    "line": "Нужны запчасти или аксессуары?",
+    "linkLabel": "Перейти в магазин"
+  },
   "steps": [
     {
       "image": "https://placehold.co/600x400/667eea/white?text=%D0%A8%D0%B0%D0%B3+1%3A+%D0%A0%D0%B0%D1%81%D0%BF%D0%B0%D0%BA%D1%83%D0%B9%D1%82%D0%B5+%D0%B4%D0%B5%D1%82%D0%B0%D0%BB%D0%B8&font=montserrat",
@@ -21,12 +26,5 @@
       "image": "https://placehold.co/600x400/4facfe/white?text=%D0%A8%D0%B0%D0%B3+4%3A+%D0%9F%D1%80%D0%B8%D0%BA%D1%80%D1%83%D1%82%D0%B8%D1%82%D0%B5+%D0%B4%D0%B2%D0%B5%D1%80%D1%86%D1%8B&font=montserrat",
       "description": "Навесьте дверцы на петли. Отрегулируйте зазоры."
     }
-  ],
-  "postAssembly": {
-    "title": "После сборки",
-    "items": [
-      { "label": "Активировать гарантию", "href": "#warranty" },
-      { "label": "Заказать доп. полку или фурнитуру", "href": "#accessories" }
-    ]
-  }
+  ]
 }
