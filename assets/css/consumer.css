@@ -479,6 +479,12 @@ body {
   background: #e2e8f0;
 }
 
+.zoom-tool-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .zoom-tool-btn--text {
   font-size: 13px;
   font-weight: 600;
@@ -548,6 +554,10 @@ body {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.25);
   color: #f8fafc;
+}
+
+.zoom-lightbox__toolbar .zoom-tool-btn:disabled {
+  opacity: 0.35;
 }
 
 .zoom-lightbox__pct {

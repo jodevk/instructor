@@ -81,8 +81,25 @@
     }
   }
 
+  /** Масштаб инструкции: не меньше 100% (1), не больше 300% (3). */
+  var ZOOM_MIN = 1;
+  var ZOOM_MAX = 3;
+
   function clampZoom(s) {
-    return Math.min(3, Math.max(1, Math.round(s * 100) / 100));
+    var x = Math.round(Number(s) * 100) / 100;
+    if (x < ZOOM_MIN) return ZOOM_MIN;
+    if (x > ZOOM_MAX) return ZOOM_MAX;
+    return x;
+  }
+
+  function updateInlineZoomButtons() {
+    var out = document.getElementById('zoomOutBtn');
+    if (out) out.disabled = zoomScale <= ZOOM_MIN + 0.001;
+  }
+
+  function updateLbZoomButtons() {
+    var out = document.getElementById('lbZoomOut');
+    if (out) out.disabled = lbScale <= ZOOM_MIN + 0.001;
   }
 
   function applyInlineZoom() {
@@ -99,6 +116,7 @@
       img.style.height = 'auto';
       img.style.width = Math.round(nw * zoomScale) + 'px';
       if (label) label.textContent = Math.round(zoomScale * 100) + '%';
+      updateInlineZoomButtons();
       return true;
     }
 
@@ -135,6 +153,7 @@
       img.style.width = 'auto';
     }
     if (label) label.textContent = Math.round(lbScale * 100) + '%';
+    updateLbZoomButtons();
   }
 
   function openZoomLightbox() {
@@ -187,8 +206,9 @@
     vp.addEventListener(
       'wheel',
       function (e) {
-        e.preventDefault();
         var step = e.deltaY > 0 ? -0.12 : 0.12;
+        if (step < 0 && zoomScale <= ZOOM_MIN + 0.001) return;
+        e.preventDefault();
         zoomScale = clampZoom(zoomScale + step);
         applyInlineZoom();
       },
@@ -211,7 +231,11 @@
           e.preventDefault();
           var d = touchDistance(e.touches[0], e.touches[1]);
           if (pinchState.d > 0) {
-            zoomScale = clampZoom(pinchState.scale * (d / pinchState.d));
+            var next = clampZoom(pinchState.scale * (d / pinchState.d));
+            zoomScale = next;
+            if (next <= ZOOM_MIN + 0.001) {
+              pinchState = { d: d, scale: ZOOM_MIN };
+            }
             applyInlineZoom();
           }
         }
@@ -266,8 +290,10 @@
     vp.addEventListener(
       'wheel',
       function (e) {
+        var delta = e.deltaY > 0 ? -0.12 : 0.12;
+        if (delta < 0 && lbScale <= ZOOM_MIN + 0.001) return;
         e.preventDefault();
-        lbScale = clampZoom(lbScale + (e.deltaY > 0 ? -0.12 : 0.12));
+        lbScale = clampZoom(lbScale + delta);
         applyLbZoom();
       },
       { passive: false }
@@ -290,7 +316,11 @@
           e.preventDefault();
           var d = touchDistance(e.touches[0], e.touches[1]);
           if (lbPinch.d > 0) {
-            lbScale = clampZoom(lbPinch.scale * (d / lbPinch.d));
+            var nextLb = clampZoom(lbPinch.scale * (d / lbPinch.d));
+            lbScale = nextLb;
+            if (nextLb <= ZOOM_MIN + 0.001) {
+              lbPinch = { d: d, scale: ZOOM_MIN };
+            }
             applyLbZoom();
           }
         } else if (e.touches.length === 1 && lbDrag) {
