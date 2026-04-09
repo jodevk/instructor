@@ -12,19 +12,31 @@
   "steps": [
     {
       "image": "../cropped_steps/page_1_step_1.png",
-      "description": "Распакуйте все детали. Проверьте комплектацию по списку."
+      "description": "ШАГ 1"
     },
     {
-      "image": "../cropped_steps/page_1_step_2.png",
-      "description": "Соедините боковые стенки с помощью уголков. Используйте 4 шурупа с каждой стороны."
+      "image": "../cropped_steps/page_2_step_2.png",
+      "description": "ШАГ 2"
     },
     {
-      "image": "../cropped_steps/page_1_step_3.png",
-      "description": "Вставьте полкодержатели на нужной высоте. Установите полки."
+      "image": "../cropped_steps/page_3_step_3.png",
+      "description": "ШАГ 3"
     },
     {
-      "image": "../cropped_steps/page_1_step_4.png",
-      "description": "Навесьте дверцы на петли. Отрегулируйте зазоры."
+      "image": "../cropped_steps/page_4_step_4.png",
+      "description": "ШАГ 4"
+    },
+    {
+      "image": "../cropped_steps/page_5_step_5.png",
+      "description": "ШАГ 5"
+    },
+    {
+      "image": "../cropped_steps/page_6_step_6.png",
+      "description": "ШАГ 6"
+    },
+    {
+      "image": "../cropped_steps/page_7_step_7.png",
+      "description": "ШАГ 7"
     }
   ]
 }
