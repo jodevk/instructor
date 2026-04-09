@@ -56,10 +56,6 @@
 
   var completedSteps = [];
 
-  /** Запоминание масштаба по индексу шага (при возврате на шаг — тот же zoom). */
-  var stepZooms = {};
-  var lastRenderedStep = null;
-
   var lbScale = 1;
   var lbPinch = null;
   var lbDrag = null;
@@ -445,28 +441,14 @@
   }
 
   function renderStep() {
-    if (
-      lastRenderedStep !== null &&
-      lastRenderedStep >= 0 &&
-      lastRenderedStep < steps.length
-    ) {
-      stepZooms[lastRenderedStep] = clampZoom(zoomScale);
-    }
-
     closeZoomLightbox();
     zoomHandlersBound = false;
-
-    var saved = stepZooms[currentStep];
-    zoomScale =
-      saved != null && typeof saved === 'number' && !isNaN(saved)
-        ? clampZoom(saved)
-        : 1;
+    zoomScale = clampZoom(zoomScale);
 
     var container = document.getElementById('stepContainer');
     var step = steps[currentStep];
     if (!step) {
       container.innerHTML = '<p class="step-description">Инструкция не найдена.</p>';
-      lastRenderedStep = null;
       return;
     }
 
@@ -524,7 +506,6 @@
     }
     applyInlineZoom();
     bindZoomUI();
-    lastRenderedStep = currentStep;
   }
 
   window.nextStep = function () {
@@ -681,8 +662,7 @@
             image: resolveStepImage(s.image),
           };
         });
-        stepZooms = {};
-        lastRenderedStep = null;
+        zoomScale = 1;
         postAssembly = data.postAssembly || null;
         shopCta = data.shopCta || null;
         applyMeta();
