@@ -1,4 +1,38 @@
 (function () {
+  var MOCK_MODELS = [
+    { id: 'sk123', name: 'Шкаф «Элегант»', article: 'SK-123' },
+    { id: 'tb88', name: 'Стол письменный «Офис»', article: 'TB-88' },
+    { id: 'bd42', name: 'Кровать «Соня»', article: 'BD-42' },
+    { id: 'st15', name: 'Стеллаж «Лофт»', article: 'ST-15' },
+  ];
+
+  var MOCK_EMAILS = [
+    { email: 'logist@fabrika-demo.ru', label: 'Логистика — logist@fabrika-demo.ru' },
+    { email: 'sklad@fabrika-demo.ru', label: 'Склад — sklad@fabrika-demo.ru' },
+    { email: 'support@fabrika-demo.ru', label: 'Поддержка — support@fabrika-demo.ru' },
+    { email: 'hello@mebelinstruct.ru', label: 'Общий — hello@mebelinstruct.ru' },
+  ];
+
+  function fillMockSelects() {
+    var modelSel = document.getElementById('modelSelect');
+    MOCK_MODELS.forEach(function (m) {
+      var opt = document.createElement('option');
+      opt.value = m.id;
+      opt.textContent = m.name + ' (' + m.article + ')';
+      opt.dataset.name = m.name;
+      opt.dataset.article = m.article;
+      modelSel.appendChild(opt);
+    });
+
+    var emailSel = document.getElementById('emailSelect');
+    MOCK_EMAILS.forEach(function (e) {
+      var opt = document.createElement('option');
+      opt.value = e.email;
+      opt.textContent = e.label;
+      emailSel.appendChild(opt);
+    });
+  }
+
   function appBaseUrl() {
     var path = window.location.pathname;
     var i = path.indexOf('/producer');
@@ -20,11 +54,20 @@
     document.getElementById('result').style.display = 'none';
   }
 
+  document.getElementById('modelSelect').addEventListener('change', function () {
+    var sel = document.getElementById('modelSelect');
+    var opt = sel.options[sel.selectedIndex];
+    document.getElementById('article').value = opt && opt.dataset.article ? opt.dataset.article : '';
+  });
+
   document.getElementById('uploadForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    var modelName = document.getElementById('modelName').value;
-    var article = document.getElementById('article').value || modelName;
+    var modelSel = document.getElementById('modelSelect');
+    var opt = modelSel.options[modelSel.selectedIndex];
+    var modelName = opt && opt.dataset.name ? opt.dataset.name : '';
+    var article = opt && opt.dataset.article ? opt.dataset.article : '';
+    var notifyEmail = document.getElementById('emailSelect').value;
     var pdfFile = document.getElementById('pdfFile').files[0];
 
     if (!pdfFile) {
@@ -47,7 +90,15 @@
       document.getElementById('result').style.display = 'block';
       document.getElementById('error').style.display = 'none';
 
-      window.cardData = { modelName: modelName, article: article, shortUrl: shortUrl, instructionId: instructionId };
+      window.cardData = {
+        modelName: modelName,
+        article: article,
+        shortUrl: shortUrl,
+        instructionId: instructionId,
+        notifyEmail: notifyEmail,
+      };
+
+      console.log('📧 [демо] Уведомления на:', notifyEmail);
 
       submitBtn.textContent = '🚀 Сгенерировать QR и инструкцию';
       submitBtn.disabled = false;
@@ -84,4 +135,6 @@
 
     alert('Карточка сохранена как HTML. Откройте и нажмите Ctrl+P для печати.');
   });
+
+  fillMockSelects();
 })();

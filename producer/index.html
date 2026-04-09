@@ -14,21 +14,26 @@
 
     <h1>📄 Загрузить инструкцию</h1>
     <div class="sub">Создайте QR-код и карточку-шпаргалку за 2 минуты</div>
+    <p class="mock-hint">Демо: модель и почта выбираются из справочника (мок). После бэкенда — свои списки или ввод.</p>
 
     <form id="uploadForm">
         <div class="form-group">
-            <label for="modelName">Название модели *</label>
-            <input type="text" id="modelName" required placeholder="Например: Шкаф Элегант">
+            <label for="modelSelect">Модель *</label>
+            <select id="modelSelect" required>
+                <option value="">— Выберите модель —</option>
+            </select>
         </div>
 
         <div class="form-group">
             <label for="article">Артикул</label>
-            <input type="text" id="article" placeholder="Например: SK-123">
+            <input type="text" id="article" readonly placeholder="Подставится из модели">
         </div>
 
         <div class="form-group">
-            <label for="email">Email для уведомлений (логистам)</label>
-            <input type="email" id="email" required placeholder="logist@fabrika.ru">
+            <label for="emailSelect">Email для уведомлений (логистам) *</label>
+            <select id="emailSelect" required>
+                <option value="">— Выберите получателя —</option>
+            </select>
         </div>
 
         <div class="form-group">
