@@ -437,8 +437,10 @@ body {
   background: #f1f5f9;
 }
 
+/* Не сжимаем шаг до ширины контейнера — показываем в полном разрешении, прокрутка во viewport */
 .step-image-viewport img {
-  max-width: 100%;
+  max-width: none;
+  width: auto;
   height: auto;
   display: block;
   margin: 0 auto;

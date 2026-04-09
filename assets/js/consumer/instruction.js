@@ -76,11 +76,25 @@
     var label = document.getElementById('zoomPctLabel');
     if (!img) return;
     zoomScale = clampZoom(zoomScale);
-    img.style.transform = 'none';
-    img.style.width = zoomScale * 100 + '%';
-    img.style.maxWidth = 'none';
-    img.style.height = 'auto';
-    if (label) label.textContent = Math.round(zoomScale * 100) + '%';
+
+    function setFromNatural() {
+      var nw = img.naturalWidth;
+      if (!nw) return false;
+      img.style.transform = 'none';
+      img.style.maxWidth = 'none';
+      img.style.height = 'auto';
+      img.style.width = Math.round(nw * zoomScale) + 'px';
+      if (label) label.textContent = Math.round(zoomScale * 100) + '%';
+      return true;
+    }
+
+    if (!setFromNatural()) {
+      var done = function () {
+        setFromNatural();
+      };
+      img.addEventListener('load', done, { once: true });
+      img.addEventListener('error', done, { once: true });
+    }
   }
 
   function resetInlineZoom() {
@@ -96,12 +110,16 @@
   function applyLbZoom() {
     var img = document.getElementById('zoomLightboxImg');
     var label = document.getElementById('lbZoomPct');
-    var vp = document.getElementById('zoomLightboxViewport');
-    if (!img || !vp) return;
+    if (!img) return;
     lbScale = clampZoom(lbScale);
-    img.style.width = lbScale * 100 + '%';
+    var nw = img.naturalWidth;
     img.style.maxWidth = 'none';
     img.style.height = 'auto';
+    if (nw) {
+      img.style.width = Math.round(nw * lbScale) + 'px';
+    } else {
+      img.style.width = 'auto';
+    }
     if (label) label.textContent = Math.round(lbScale * 100) + '%';
   }
 
@@ -110,15 +128,28 @@
     var box = document.getElementById('zoomLightbox');
     var img = document.getElementById('zoomLightboxImg');
     if (!srcEl || !box || !img) return;
-    img.src = srcEl.currentSrc || srcEl.src;
-    img.alt = srcEl.alt || '';
     lbScale = zoomScale;
     var vp = document.getElementById('zoomLightboxViewport');
     if (vp) {
       vp.scrollLeft = 0;
       vp.scrollTop = 0;
     }
-    applyLbZoom();
+    img.alt = srcEl.alt || '';
+
+    function afterDecode() {
+      applyLbZoom();
+    }
+
+    img.onload = function () {
+      img.onload = null;
+      afterDecode();
+    };
+    img.src = srcEl.currentSrc || srcEl.src;
+    if (img.complete && img.naturalWidth) {
+      img.onload = null;
+      afterDecode();
+    }
+
     box.classList.add('is-open');
     box.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
