@@ -12,15 +12,18 @@
       "id": "sk123",
       "name": "Шкаф «Элегант»",
       "article": "SK-123",
-      "stepsCount": 4,
-      "updatedAt": "2026-04-02",
+      "stepsCount": 7,
+      "updatedAt": "2026-04-09",
       "pdfFileName": "elegant-assembly-v3.pdf",
       "scans7d": 842,
       "steps": [
-        { "n": 1, "title": "Распаковка", "thumb": "https://placehold.co/120x80/667eea/white?text=1" },
-        { "n": 2, "title": "Боковины", "thumb": "https://placehold.co/120x80/764ba2/white?text=2" },
-        { "n": 3, "title": "Полки", "thumb": "https://placehold.co/120x80/f093fb/white?text=3" },
-        { "n": 4, "title": "Дверцы", "thumb": "https://placehold.co/120x80/4facfe/white?text=4" }
+        { "n": 1, "title": "ШАГ 1", "thumb": "../cropped_steps/page_1_step_1.png" },
+        { "n": 2, "title": "ШАГ 2", "thumb": "../cropped_steps/page_2_step_2.png" },
+        { "n": 3, "title": "ШАГ 3", "thumb": "../cropped_steps/page_3_step_3.png" },
+        { "n": 4, "title": "ШАГ 4", "thumb": "../cropped_steps/page_4_step_4.png" },
+        { "n": 5, "title": "ШАГ 5", "thumb": "../cropped_steps/page_5_step_5.png" },
+        { "n": 6, "title": "ШАГ 6", "thumb": "../cropped_steps/page_6_step_6.png" },
+        { "n": 7, "title": "ШАГ 7", "thumb": "../cropped_steps/page_7_step_7.png" }
       ]
     },
     {
@@ -85,10 +88,13 @@
   ],
   "funnels": {
     "sk123": [
-      { "step": 1, "label": "Распаковка", "reachedPct": 100, "completedPct": 94 },
-      { "step": 2, "label": "Боковины", "reachedPct": 82, "completedPct": 71 },
-      { "step": 3, "label": "Полки", "reachedPct": 68, "completedPct": 55 },
-      { "step": 4, "label": "Дверцы", "reachedPct": 54, "completedPct": 48 }
+      { "step": 1, "label": "ШАГ 1", "reachedPct": 100, "completedPct": 93 },
+      { "step": 2, "label": "ШАГ 2", "reachedPct": 89, "completedPct": 79 },
+      { "step": 3, "label": "ШАГ 3", "reachedPct": 74, "completedPct": 65 },
+      { "step": 4, "label": "ШАГ 4", "reachedPct": 62, "completedPct": 53 },
+      { "step": 5, "label": "ШАГ 5", "reachedPct": 49, "completedPct": 42 },
+      { "step": 6, "label": "ШАГ 6", "reachedPct": 38, "completedPct": 33 },
+      { "step": 7, "label": "ШАГ 7", "reachedPct": 30, "completedPct": 27 }
     ],
     "tbl88": [
       { "step": 1, "label": "Комплектация", "reachedPct": 100, "completedPct": 88 },
@@ -104,7 +110,7 @@
       "article": "SK-123",
       "rating": 5,
       "text": "Очень понятно, спасибо!",
-      "lastStepReached": 4
+      "lastStepReached": 7
     },
     {
       "id": "v2",
