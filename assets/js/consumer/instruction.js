@@ -81,8 +81,11 @@
     }
   }
 
-  /** Масштаб инструкции: не меньше 100% (1), не больше 300% (3). */
-  var ZOOM_MIN = 1;
+  /**
+   * Масштаб от натурального размера PNG: можно уменьшить (широкие схемы влезают в окно),
+   * минимум 5% (0% делает картинку невидимой). Максимум 300%.
+   */
+  var ZOOM_MIN = 0.05;
   var ZOOM_MAX = 3;
 
   function clampZoom(s) {
@@ -94,12 +97,12 @@
 
   function updateInlineZoomButtons() {
     var out = document.getElementById('zoomOutBtn');
-    if (out) out.disabled = zoomScale <= ZOOM_MIN + 0.001;
+    if (out) out.disabled = zoomScale <= ZOOM_MIN + 1e-4;
   }
 
   function updateLbZoomButtons() {
     var out = document.getElementById('lbZoomOut');
-    if (out) out.disabled = lbScale <= ZOOM_MIN + 0.001;
+    if (out) out.disabled = lbScale <= ZOOM_MIN + 1e-4;
   }
 
   function applyInlineZoom() {
@@ -207,7 +210,7 @@
       'wheel',
       function (e) {
         var step = e.deltaY > 0 ? -0.12 : 0.12;
-        if (step < 0 && zoomScale <= ZOOM_MIN + 0.001) return;
+        if (step < 0 && zoomScale <= ZOOM_MIN + 1e-4) return;
         e.preventDefault();
         zoomScale = clampZoom(zoomScale + step);
         applyInlineZoom();
@@ -233,7 +236,7 @@
           if (pinchState.d > 0) {
             var next = clampZoom(pinchState.scale * (d / pinchState.d));
             zoomScale = next;
-            if (next <= ZOOM_MIN + 0.001) {
+            if (next <= ZOOM_MIN + 1e-4) {
               pinchState = { d: d, scale: ZOOM_MIN };
             }
             applyInlineZoom();
@@ -291,7 +294,7 @@
       'wheel',
       function (e) {
         var delta = e.deltaY > 0 ? -0.12 : 0.12;
-        if (delta < 0 && lbScale <= ZOOM_MIN + 0.001) return;
+        if (delta < 0 && lbScale <= ZOOM_MIN + 1e-4) return;
         e.preventDefault();
         lbScale = clampZoom(lbScale + delta);
         applyLbZoom();
@@ -303,7 +306,7 @@
       if (e.touches.length === 2) {
         lbPinch = { d: touchDistance(e.touches[0], e.touches[1]), scale: lbScale };
         lbDrag = null;
-      } else if (e.touches.length === 1 && lbScale > 1.02) {
+      } else if (e.touches.length === 1 && (vp.scrollWidth > vp.clientWidth + 2 || vp.scrollHeight > vp.clientHeight + 2)) {
         var t = e.touches[0];
         lbDrag = { x: t.clientX, y: t.clientY, sl: vp.scrollLeft, st: vp.scrollTop };
       }
@@ -318,7 +321,7 @@
           if (lbPinch.d > 0) {
             var nextLb = clampZoom(lbPinch.scale * (d / lbPinch.d));
             lbScale = nextLb;
-            if (nextLb <= ZOOM_MIN + 0.001) {
+            if (nextLb <= ZOOM_MIN + 1e-4) {
               lbPinch = { d: d, scale: ZOOM_MIN };
             }
             applyLbZoom();
@@ -340,7 +343,8 @@
 
     var dragMouse = null;
     vp.addEventListener('mousedown', function (e) {
-      if (e.button !== 0 || lbScale <= 1.02) return;
+      if (e.button !== 0) return;
+      if (vp.scrollWidth <= vp.clientWidth + 2 && vp.scrollHeight <= vp.clientHeight + 2) return;
       dragMouse = { x: e.clientX, y: e.clientY, sl: vp.scrollLeft, st: vp.scrollTop };
       vp.classList.add('is-dragging');
     });
@@ -479,7 +483,7 @@
       '<button type="button" class="zoom-tool-btn zoom-tool-btn--text" id="zoomResetBtn">Сброс</button>' +
       '<button type="button" class="zoom-tool-btn zoom-tool-btn--text" id="zoomFsBtn">Весь экран</button>' +
       '</div>' +
-      '<div class="zoom-hint">Колёсико · щипок · кнопки</div>' +
+      '<div class="zoom-hint">Колёсико · щипок · от 5% до 300%</div>' +
       '</div>' +
       '<div class="step-description">' +
       step.description +
