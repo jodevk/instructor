@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель завода — Instructor</title>
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body">
+<div class="admin-app">
+    <aside class="admin-sidebar">
+        <div class="admin-sidebar__brand">
+            Instru<span>ctor</span>
+            <span class="admin-sidebar__badge">Админ завода</span>
+        </div>
+        <ul class="admin-nav">
+            <li><button type="button" data-panel="overview" class="is-active">Обзор</button></li>
+            <li><button type="button" data-panel="models">Модели</button></li>
+            <li><button type="button" data-panel="requests">Заявки клиентов</button></li>
+            <li><button type="button" data-panel="analytics">Аналитика и отзывы</button></li>
+            <li><button type="button" data-panel="subscription">Подписка</button></li>
+        </ul>
+        <div class="admin-sidebar__foot">
+            <a href="../producer/">← Загрузка инструкций</a><br>
+            <a href="../" style="margin-top: 8px; display: inline-block;">На сайт</a>
+        </div>
+    </aside>
+
+    <main class="admin-main">
+        <div class="admin-top">
+            <h1 id="adminPageTitle">Обзор</h1>
+            <p class="sub" id="adminPageSub">Демо-данные из <code>data/admin-mock.json</code> — после бэкенда подставится API.</p>
+        </div>
+
+        <section id="panel-overview" class="admin-panel is-visible" data-panel-content="overview">
+            <div class="admin-grid-stats" id="overviewStats"></div>
+            <div class="admin-card">
+                <h2>Последние заявки</h2>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Модель</th>
+                                <th>Тип</th>
+                                <th>Шаг</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody id="overviewRequestsPreview"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="panel-models" class="admin-panel" data-panel-content="models">
+            <div class="admin-card">
+                <h2>Все загруженные модели</h2>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Модель</th>
+                                <th>Артикул</th>
+                                <th>Шагов</th>
+                                <th>PDF</th>
+                                <th>Обновлено</th>
+                                <th>Сканов / 7 дн.</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="modelsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="panel-requests" class="admin-panel" data-panel-content="requests">
+            <div class="admin-card">
+                <h2>Заявки от клиентов</h2>
+                <p class="sub" style="margin: -8px 0 16px;">Нехватка деталей и др. (прототип).</p>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Дата</th>
+                                <th>Модель</th>
+                                <th>Тип</th>
+                                <th>Шаг</th>
+                                <th>Деталь</th>
+                                <th>Статус</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="requestsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="panel-analytics" class="admin-panel" data-panel-content="analytics">
+            <div class="admin-card">
+                <h2>Воронка сборки (где бросают)</h2>
+                <label class="sub" for="funnelModelSelect" style="display:block;margin-bottom:8px;">Модель</label>
+                <select id="funnelModelSelect" class="select-model"></select>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Шаг</th>
+                                <th>Название</th>
+                                <th>Дошли до шага</th>
+                                <th>Отметили «выполнено»</th>
+                                <th>Визуально</th>
+                            </tr>
+                        </thead>
+                        <tbody id="funnelTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="admin-card">
+                <h2>Отзывы клиентов</h2>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Модель</th>
+                                <th>Оценка</th>
+                                <th>Комментарий</th>
+                                <th>Последний шаг</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reviewsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="panel-subscription" class="admin-panel" data-panel-content="subscription">
+            <div class="admin-card" id="subscriptionCard"></div>
+        </section>
+    </main>
+</div>
+
+<div id="modelModal" class="admin-modal" aria-hidden="true">
+    <div class="admin-modal__box">
+        <div class="admin-modal__head">
+            <div>
+                <h2 id="modalModelTitle">—</h2>
+                <p class="admin-modal__meta" id="modalModelMeta"></p>
+            </div>
+            <button type="button" class="admin-modal__close" id="modelModalClose" aria-label="Закрыть">×</button>
+        </div>
+        <div class="admin-modal__body">
+            <h3 style="font-size:15px;margin-bottom:12px;color:#334155;">Шаги инструкции</h3>
+            <div class="steps-preview" id="modalStepsPreview"></div>
+            <div class="edit-block">
+                <h3>Изменить модель — новый PDF</h3>
+                <p class="sub" style="margin-bottom:12px;">После загрузки PDF пересоберутся шаги и QR останется прежним (демо).</p>
+                <input type="file" id="modalPdfInput" accept=".pdf">
+                <button type="button" class="btn-sm btn-sm--primary" id="modalPdfSubmit">Загрузить новый PDF (демо)</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/admin/app.js"></script>
+</body>
+</html>

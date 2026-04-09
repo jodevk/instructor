@@ -16,6 +16,11 @@
       upload: '/instructions/upload',
       analytics: '/analytics/events',
       missingParts: '/reports/missing-parts',
+      /** Админка завода (после бэкенда) */
+      adminDashboard: '/admin/dashboard',
+      adminModels: '/admin/models',
+      adminRequests: '/admin/requests',
+      adminSubscription: '/admin/subscription',
     },
   };
 })();
