@@ -320,25 +320,11 @@ h3 {
   white-space: nowrap;
 }
 
-.pricing-notes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 48px;
-  max-width: 1080px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.pricing-note {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 24px 26px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+.pricing-notes .pricing-note:only-child {
+  grid-column: 1 / -1;
+  max-width: 640px;
+  width: 100%;
+  justify-self: center;
 }
 
 .pricing-note--info {
