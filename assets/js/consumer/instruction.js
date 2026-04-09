@@ -441,8 +441,10 @@
   }
 
   function renderStep() {
+    closeZoomLightbox();
     zoomHandlersBound = false;
-    resetInlineZoom();
+    zoomScale = 1;
+    lbScale = 1;
 
     var container = document.getElementById('stepContainer');
     var step = steps[currentStep];
@@ -498,6 +500,11 @@
       '</div>' +
       '<button type="button" class="missing-btn" onclick="openModal()">📦 Не хватает детали? Сообщить</button>';
 
+    var vp = document.getElementById('stepImageViewport');
+    if (vp) {
+      vp.scrollLeft = 0;
+      vp.scrollTop = 0;
+    }
     applyInlineZoom();
     bindZoomUI();
   }
