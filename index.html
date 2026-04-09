@@ -11,12 +11,21 @@
     <link rel="stylesheet" href="assets/css/landing.css">
 </head>
 <body>
-<!-- Демо для пилота (прямые URL, не в меню): consumer/?id=demo — сборка; producer/ — кабинет завода -->
+<!--
+  ЛЕНДИНГ — ДЕМО ДЛЯ КОМАНДЫ
+  Чтобы скрыть ссылки «Демо сборки» и «Панель завода» у клиентов:
+  добавьте символы <!-- сразу ПЕРЕД <div class="landing-demo-nav"> ниже
+  и символы --> сразу ПОСЛЕ закрывающего </div> (один блок в комментарий).
+-->
 
 <header class="header">
     <div class="container header-inner">
         <a href="./" class="logo">Instru<span>ctor</span></a>
         <div class="nav-links">
+            <div class="landing-demo-nav" style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                <a href="consumer/?id=demo" class="btn btn-outline" style="padding: 10px 20px;">Демо сборки</a>
+                <a href="producer/" class="btn btn-outline" style="padding: 10px 20px;">Панель завода</a>
+            </div>
             <a href="#try" class="btn btn-primary" style="padding: 10px 20px;">Тарифы</a>
             <a href="#contact" class="btn btn-outline" style="padding: 10px 20px;">Связаться</a>
         </div>
