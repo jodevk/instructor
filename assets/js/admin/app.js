@@ -1,4 +1,22 @@
 (function () {
+  var cfg = window.INSTRUCTOR || { appVersion: '1' };
+
+  function withCacheBust(url) {
+    var v = cfg.appVersion || '1';
+    var sep = url.indexOf('?') >= 0 ? '&' : '?';
+    return url + sep + 'v=' + encodeURIComponent(v);
+  }
+
+  function escapeAttr(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  }
+
+  function resolveThumbUrl(src) {
+    if (!src) return src;
+    if (/^https?:\/\//i.test(src)) return withCacheBust(src);
+    return withCacheBust(new URL(src, window.location.href).href);
+  }
+
   var titles = {
     overview: { title: 'Обзор', sub: 'Ключевые цифры и свежие заявки.' },
     models: { title: 'Модели', sub: 'Все инструкции, карточка и замена PDF.' },
@@ -102,7 +120,7 @@
         .map(function (s) {
           return (
             '<div class="step-thumb"><img src="' +
-            s.thumb +
+            escapeAttr(resolveThumbUrl(s.thumb)) +
             '" alt="Шаг ' +
             s.n +
             '" loading="lazy"><span>Шаг ' +
@@ -324,8 +342,8 @@
     if (e.key === 'Escape') closeModelModal();
   });
 
-  var url = new URL('../data/admin-mock.json', window.location.href).href;
-  fetch(url)
+  var url = withCacheBust(new URL('../data/admin-mock.json', window.location.href).href);
+  fetch(url, { cache: 'no-cache' })
     .then(function (r) {
       if (!r.ok) throw new Error('mock');
       return r.json();

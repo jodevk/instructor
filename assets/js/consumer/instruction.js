@@ -13,6 +13,20 @@
     return new URL('../data/instructions/' + encodeURIComponent(id) + '.json', window.location.href).href;
   }
 
+  function withCacheBust(url) {
+    var v = cfg.appVersion || '1';
+    var sep = url.indexOf('?') >= 0 ? '&' : '?';
+    return url + sep + 'v=' + encodeURIComponent(v);
+  }
+
+  /** Относительные пути из JSON считаются от URL страницы consumer (важно для /consumer и /consumer/). */
+  function resolveStepImage(src) {
+    if (!src) return src;
+    if (/^https?:\/\//i.test(src)) return withCacheBust(src);
+    var abs = new URL(src, window.location.href).href;
+    return withCacheBust(abs);
+  }
+
   function escapeAttr(s) {
     return String(s)
       .replace(/&/g, '&amp;')
@@ -591,7 +605,8 @@
       }
     });
 
-    fetch(instructionJsonUrl(instructionId))
+    var jsonHref = withCacheBust(instructionJsonUrl(instructionId));
+    fetch(jsonHref, { cache: 'no-cache' })
       .then(function (r) {
         if (!r.ok) throw new Error('not found');
         return r.json();
@@ -601,7 +616,12 @@
         meta.article = data.article || '—';
         meta.supportPhone = data.supportPhone || '8-800-123-45-67';
         meta.fallbackUrlHint = data.fallbackUrlHint || window.location.host;
-        steps = data.steps || [];
+        steps = (data.steps || []).map(function (s) {
+          return {
+            description: s.description,
+            image: resolveStepImage(s.image),
+          };
+        });
         postAssembly = data.postAssembly || null;
         shopCta = data.shopCta || null;
         applyMeta();

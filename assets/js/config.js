@@ -9,7 +9,8 @@
       ? window.__INSTRUCTOR_API_BASE__
       : '',
     /** Версия для кэша статики (опционально) */
-    appVersion: '0.1.0-prototype',
+    /** Меняйте при обновлении demo.json / картинок — сбрасывает кэш у клиентов */
+    appVersion: '0.2.0-demo-steps',
     /** Пути для будущих эндпоинтов (используйте в fetch после появления бэкенда) */
     endpoints: {
       instructions: '/instructions',
