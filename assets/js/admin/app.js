@@ -301,8 +301,7 @@
       '<button type="button" class="btn-sm btn-sm--primary" id="subUpgradeDemo">Сменить тариф (демо)</button>' +
       '<button type="button" class="btn-sm btn-sm--ghost" id="subHistoryDemo">История платежей (демо)</button>' +
       '<button type="button" class="btn-sm btn-sm--ghost" id="subCancelDemo">Условия отмены (демо)</button>' +
-      '</div>' +
-      '<p class="sub" style="margin-top:20px;">Подключение оплаты и webhooks — на этапе бэкенда.</p>';
+      '</div>';
 
     document.getElementById('subUpgradeDemo').onclick = function () {
       alert('Демо: здесь будет выбор тарифа и оплата.');
